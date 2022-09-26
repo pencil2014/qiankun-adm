@@ -44,7 +44,7 @@
   </el-dialog>
 </template>
 <script>
-import { returnDetail } from '@/api/bkg/stockApply'
+// import { returnDetail } from '@/api/bkg/stockApply'
 export default {
   name: 'financeUploadFile',
   props: {

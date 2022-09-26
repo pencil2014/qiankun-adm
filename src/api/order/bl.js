@@ -382,6 +382,14 @@ export function blListBox(data) {
 		data
 	})
 }
+// 铁路提单号
+export function railBlListBox(data) {
+	return request({
+		url: '/order/rail/bl/list',
+		method: 'post',
+		data
+	})
+}
 // 提单保存验证
 export function blSaveCheck(data) {
 	return request({

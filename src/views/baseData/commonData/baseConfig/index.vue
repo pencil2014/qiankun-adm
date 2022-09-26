@@ -59,7 +59,7 @@
         <el-table-column align="center" prop="row" label="操作" width="200">
           <template slot-scope="scope">
             <el-button @click="handleEdit(scope.row)" type="text" size="mini">查看</el-button>
-            <el-button @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
+            <el-button @click="handleDelete(scope.row)" type="text" size="mini" style="color:#cd4130;">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

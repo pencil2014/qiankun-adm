@@ -12,7 +12,7 @@
   <div class="components-container  m-t-8">
     <div class="filter-containe search-layout">
       <div class="filter">
-        <el-button size="small"  @click="handleAdd('')" type="primary">
+        <el-button size="mini"  @click="handleAdd('')" type="primary">
           <i class="el-icon-plus"></i> 新增子模块
         </el-button>
         <div class='title-text'>所处页面:&nbsp;&nbsp;{{this.oQuery.pageName}}</div>
@@ -31,9 +31,9 @@
         <el-table-column align="center" prop="moduleSubmitUrl"  label="提交功能" > </el-table-column> -->
         <el-table-column align="center" prop="row" label="操作" width="180">
             <template slot-scope="scope">
-              <el-button @click="handleEdit(scope.row)" type="text" size="small"  >查看</el-button>
-              <el-button @click="handleSubModule(scope.row)" type="text" size="small"  >新增子模块</el-button>
-              <el-button @click="handleDelete(scope.row)" size="small" type="text">删除</el-button>
+              <el-button @click="handleEdit(scope.row)" type="text" size="mini"  >查看</el-button>
+              <el-button @click="handleSubModule(scope.row)" type="text" size="mini"  >新增子模块</el-button>
+              <el-button @click="handleDelete(scope.row)" size="mini" type="text">删除</el-button>
             </template>
          </el-table-column>
     </el-table>
@@ -51,35 +51,35 @@
         </el-row>
        </div>
          <el-form-item label="子模块名称" label-width="80px" prop="moduleName">
-          <el-input style="width:80%" size="small" v-model="createItem.moduleName" ></el-input>
+          <el-input style="width:80%" size="mini" v-model="createItem.moduleName" ></el-input>
         </el-form-item>
         <el-form-item label="子模块编码" label-width="80px" prop="moduleCode">
-          <el-input style="width:80%" size="small" :disabled="sysGenCodeChecked" v-model="createItem.moduleCode" placeholder="全局唯一编码"></el-input>
+          <el-input style="width:80%" size="mini" :disabled="sysGenCodeChecked" v-model="createItem.moduleCode" placeholder="全局唯一编码"></el-input>
            <!-- <el-checkbox style="margin-left:10px" v-model="sysGenCodeChecked" @change="handleChangeSystemGenCode">系统生成</el-checkbox> -->
         </el-form-item>
         <el-form-item label="序号" label-width="80px" prop="sort">
-          <el-input style="width:80%" size="small"  v-model="createItem.sort" placeholder="序号"></el-input>
+          <el-input style="width:80%" size="mini"  v-model="createItem.sort" placeholder="序号"></el-input>
            <!-- <el-checkbox style="margin-left:10px" v-model="sysGenCodeChecked" @change="handleChangeSystemGenCode">系统生成</el-checkbox> -->
         </el-form-item>
         <el-form-item label="功能路径URL" label-width="90px" prop="moduleViewUrl">
-          <el-input style="width:80%" size="small" v-model="createItem.moduleViewUrl" placeholder="选填(该模块有请求后端接口时)"></el-input>
+          <el-input style="width:80%" size="mini" v-model="createItem.moduleViewUrl" placeholder="选填(该模块有请求后端接口时)"></el-input>
        </el-form-item>
         <!-- 
           <el-form-item label="编辑功能路径" label-width="90px" prop="moduleEditUrl">
-          <el-input style="width:80%" size="small" v-model="createItem.moduleEditUrl" placeholder="选填(该模块有点击编辑功能是)"></el-input>
+          <el-input style="width:80%" size="mini" v-model="createItem.moduleEditUrl" placeholder="选填(该模块有点击编辑功能是)"></el-input>
         </el-form-item>
           <el-form-item label="提交功能路径" label-width="90px" prop="moduleSubmitUrl">
-          <el-input style="width:80%" size="small" v-model="createItem.moduleSubmitUrl" placeholder="选填(该模块有提交功能时)"></el-input>
+          <el-input style="width:80%" size="mini" v-model="createItem.moduleSubmitUrl" placeholder="选填(该模块有提交功能时)"></el-input>
         </el-form-item> -->
         <el-form-item label="备注" label-width="80px" prop="remark">
-           <el-input  type="textarea" :rows="2" style="width:80%" size="small" v-model="createItem.remark" placeholder=""></el-input>
+           <el-input  type="textarea" :rows="2" style="width:80%" size="mini" v-model="createItem.remark" placeholder=""></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="small" type="primary" @click="submitForm('createItemForm')"> 
+        <el-button size="mini" type="primary" @click="submitForm('createItemForm')"> 
           <i class="el-icon-copy-document"></i> 保存
         </el-button>
-        <el-button size="small" @click="cancel">取 消</el-button>
+        <el-button size="mini" @click="cancel">取 消</el-button>
       </div>
   </el-dialog>
 </div>

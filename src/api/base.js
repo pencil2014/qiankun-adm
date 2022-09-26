@@ -775,7 +775,6 @@ export function getInvoicePrintUrlConfig(data) {
 		data
 	})
 }
-
 // 根据用户ID获取详细信息
 export function getEmployeeInfo(data) {
 	return request({

@@ -75,7 +75,7 @@
         <el-table-column align="center" prop="row" label="操作" width="200">
           <template slot-scope="scope">
             <el-button @click="handleEdit(scope.row)" type="text" size="mini">查看</el-button>
-            <el-button @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
+            <el-button @click="handleDelete(scope.row)" type="text" size="mini" style="color:#cd4130;">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -193,7 +193,7 @@
             </el-table-column>
           </el-table>
           <div class="dialog-add">
-            <el-button style="width:100%" size="small" @click="dictItemAdd"> 
+            <el-button style="width:100%" size="mini" @click="dictItemAdd"> 
               <i class="el-icon-plus"></i>
                 新增字典项
             </el-button>

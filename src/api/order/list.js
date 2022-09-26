@@ -1,4 +1,20 @@
 import request from '@/utils/request'
+// 货物出运查询结算单位
+export function finListSettleUnit(data) {
+	return request({
+		url: '/order/fin/listSettleUnit',
+		method: 'post',
+		data
+	})
+}
+// 货物出运保存结算单位
+export function finSaveSettleUnit(data) {
+	return request({
+		url: '/order/fin/saveSettleUnit',
+		method: 'post',
+		data
+	})
+}
 // 集装箱维护日志
 export function containerLogList(data) {
 	return request({
@@ -936,6 +952,14 @@ export function orderFileTempDownload(folder, fileName) {
 export function orderContainerList(data) {
 	return request({
 		url: '/order/shiporder/container/list',
+		method: 'post',
+		data
+	})
+}
+// 铁路集装箱列表
+export function railContainerList(data) {
+	return request({
+		url: '/order/rail/order/container/list',
 		method: 'post',
 		data
 	})
@@ -1979,6 +2003,14 @@ export function standEdit(data) {
 export function getBlNoByOrderNo(data) {
 	return request({
 		url: '/order/main/getBlNoByOrderNo',
+		method: 'post',
+		data
+	})
+}
+// 快捷生成费用
+export function feeCreate(data) {
+	return request({
+		url: '/order/over/enquiry/fee/create',
 		method: 'post',
 		data
 	})

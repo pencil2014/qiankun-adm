@@ -23,10 +23,10 @@
         </div>
       </div>
       <div class="operation-btns-box" >
-        <el-button size="small"  @click="handleSearch" type="primary">
+        <el-button size="mini"  @click="handleSearch" type="primary">
           <i class="el-icon-search"></i> 搜索
         </el-button>
-        <el-button size="small"  @click="handleReset" plain>
+        <el-button size="mini"  @click="handleReset" plain>
            重置 
         </el-button>
       </div>
@@ -35,7 +35,7 @@
   <div class="components-container  m-t-8">
     <div class="filter-containe search-layout">
       <div class="filter">
-        <el-button size="small"  @click="handleAdd()" type="primary">
+        <el-button size="mini"  @click="handleAdd()" type="primary">
           <i class="el-icon-plus"></i> 新增参数
         </el-button>
       </div>
@@ -53,8 +53,8 @@
         </el-table-column>
         <el-table-column align="center" prop="row" label="操作" width="300">
             <template slot-scope="scope">
-              <el-button @click="handleEdit(scope.row)" type="text" size="small">查看</el-button>
-              <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
+              <el-button @click="handleEdit(scope.row)" type="text" size="mini">查看</el-button>
+              <el-button @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
             </template>
          </el-table-column>
     </el-table>
@@ -64,10 +64,10 @@
   <el-dialog :title="title" :visible.sync="open" :lock-scroll="true" width="600px"  @close="dialogClose">
      <el-form ref="createItemForm" :rules="rules" :model="createItem" label-suffix=":"  >
          <el-form-item label="参数编码" label-width="80px" prop="paramCode">
-          <el-input style="width:80%" size="small" v-model="createItem.paramCode" ></el-input>
+          <el-input style="width:80%" size="mini" v-model="createItem.paramCode" ></el-input>
         </el-form-item>
         <el-form-item label="SQL" label-width="80px" prop="sqlExp">
-          <el-input type="textarea" rows="4"  style="width:80%" size="small" v-model="createItem.sqlExp"></el-input>
+          <el-input type="textarea" rows="4"  style="width:80%" size="mini" v-model="createItem.sqlExp"></el-input>
         </el-form-item>
         <el-form-item label="返回类型" label-width="80px" prop="retType">
           <el-radio-group v-model="createItem.retType">
@@ -85,7 +85,7 @@
           </el-radio-group>
         </el-form-item>
          <el-form-item label="备注" label-width="80px" prop="remark">
-          <el-input type="textarea" rows="2"  style="width:80%" size="small" v-model="createItem.remark"></el-input>
+          <el-input type="textarea" rows="2"  style="width:80%" size="mini" v-model="createItem.remark"></el-input>
         </el-form-item>
          <el-form-item label="是否有效" label-width="80px" prop="state">
            <el-select  style="width:80%" size="mini"  v-model="createItem.state"  >
@@ -98,10 +98,10 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="small" type="primary" @click="submitForm('createItemForm')"> 
+        <el-button size="mini" type="primary" @click="submitForm('createItemForm')"> 
           <i class="el-icon-copy-document"></i> 保存
         </el-button>
-        <el-button size="small" @click="cancel">取 消</el-button>
+        <el-button size="mini" @click="cancel">取 消</el-button>
       </div>
   </el-dialog>
 </div>

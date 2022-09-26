@@ -13,7 +13,7 @@
       <el-form-item size="mini" label="授权">
         <div class="rule_tree">
           <el-input class='rule_tree_input'
-              size="small"
+              size="mini"
             placeholder="输入关键字进行过滤"
             v-model="filterText">
           </el-input>

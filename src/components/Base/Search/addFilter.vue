@@ -54,7 +54,7 @@
 								:min="filterGroups[item.key].minValue || 0"
 								:max="maxNumber"
 								:precision="0"
-								size="small"
+								size="mini"
 								:placeholder="filterGroups[item.key]['min-placeholder'] || '最小值'" 
 								@change="numberRangeChange"
 								>
@@ -65,7 +65,7 @@
 								:min="minNumber"
 								:max="filterGroups[item.key].maxValue"
 								:precision="0"
-								size="small"
+								size="mini"
 								:placeholder="filterGroups[item.key]['max-placeholder'] || '最大值'" 
 								@change="numberRangeChange"
 								>

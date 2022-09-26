@@ -27,10 +27,10 @@
         </div>
       </div>
       <div class="operation-btns-box" >
-        <el-button size="small"  @click="handleSearch" type="primary">
+        <el-button size="mini"  @click="handleSearch" type="primary">
           <i class="el-icon-search"></i> 搜索
         </el-button>
-        <el-button size="small"  @click="handleReset" plain>
+        <el-button size="mini"  @click="handleReset" plain>
            重置 
         </el-button>
       </div>
@@ -39,7 +39,7 @@
   <div class="components-container  m-t-8">
     <div class="filter-containe search-layout">
       <div class="filter">
-        <el-button size="small"  @click="handleAdd()" type="primary">
+        <el-button size="mini"  @click="handleAdd()" type="primary">
           <i class="el-icon-plus"></i> 新增全局权限
         </el-button>
       </div>
@@ -57,8 +57,8 @@
         <el-table-column align="center"  prop="privilegeValueDesc" label="权限值描述" ></el-table-column>   
         <el-table-column align="center" prop="row" label="操作" width="300">
             <template slot-scope="scope">
-              <el-button @click="handleEdit(scope.row)" type="text" size="small">查看</el-button>
-               <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
+              <el-button @click="handleEdit(scope.row)" type="text" size="mini">查看</el-button>
+               <el-button @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
             </template>
          </el-table-column>
     </el-table>
@@ -132,10 +132,10 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="small" type="primary" @click="submitForm('createItemForm')"> 
+        <el-button size="mini" type="primary" @click="submitForm('createItemForm')"> 
           <i class="el-icon-copy-document"></i> 保存
         </el-button>
-        <el-button size="small" @click="cancel">取 消</el-button>
+        <el-button size="mini" @click="cancel">取 消</el-button>
       </div>
   </el-dialog>
 </div>

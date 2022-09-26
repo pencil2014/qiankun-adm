@@ -31,10 +31,10 @@
         </div>
       </div>
       <div class="operation-btns-box" >
-        <el-button size="small"  @click="handleSearch" type="primary">
+        <el-button size="mini"  @click="handleSearch" type="primary">
           <i class="el-icon-search"></i> 搜索
         </el-button>
-        <el-button size="small"  @click="handleReset" plain>
+        <el-button size="mini"  @click="handleReset" plain>
            重置 
         </el-button>
       </div>
@@ -43,7 +43,7 @@
   <div class="components-container  m-t-8">
     <div class="filter-containe search-layout">
       <div class="filter">
-        <el-button size="small"  @click="handleAdd()" type="primary">
+        <el-button size="mini"  @click="handleAdd()" type="primary">
           <i class="el-icon-plus"></i> 新增规则
         </el-button>
       </div>
@@ -60,30 +60,30 @@
         </el-table-column> -->
         <el-table-column align="center" prop="row" label="操作" width="300">
             <template slot-scope="scope">
-              <el-button @click="handleEdit(scope.row)" type="text" size="small">查看</el-button>
-              <el-button @click="handleEdit(scope.row)" type="text" size="small">测试</el-button>
-              <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
+              <el-button @click="handleEdit(scope.row)" type="text" size="mini">查看</el-button>
+              <el-button @click="handleEdit(scope.row)" type="text" size="mini">测试</el-button>
+              <el-button @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
             </template>
          </el-table-column>
     </el-table>
        <!-- 分页 -->
       <Pagination :config="tableConfig" :tableQuery="tableQuery" :callback="tableCallBack"/>
   </div>
-  <el-dialog :title="title" :visible.sync="open" :lock-scroll="true" width="800px" @open="dialogOpen"  @close="dialogClose">
+  <el-dialog :title="title" :visible.sync="open" :lock-scroll="true" width="60%" @open="dialogOpen"  @close="dialogClose">
      <el-form ref="createItemForm" :rules="rules" :model="createItem" label-suffix=":"  >
        <el-row :gutter="20">
-         <el-col :span="13">
+         <el-col :span="12">
           <el-form-item label="分组名称" label-width="80px" prop="groupName">
-            <el-input style="width:100%" size="small" v-model="createItem.groupName" ></el-input>
+            <el-input style="width:100%" size="mini" v-model="createItem.groupName" ></el-input>
           </el-form-item>
           <el-form-item label="分组编码" label-width="80px" prop="groupCode">
-            <el-input style="width:100%" size="small" v-model="createItem.groupCode" ></el-input>
+            <el-input style="width:100%" size="mini" v-model="createItem.groupCode" ></el-input>
           </el-form-item>
           <el-form-item label="业务编码" label-width="80px" prop="moduleCode">
-            <el-input style="width:100%" size="small" v-model="createItem.moduleCode" ></el-input>
+            <el-input style="width:100%" size="mini" v-model="createItem.moduleCode" ></el-input>
           </el-form-item>
           <el-form-item label="说明" label-width="80px" prop="remark">
-            <el-input type="textarea" rows="3"  style="width:100%" size="small" v-model="createItem.remark"></el-input>
+            <el-input type="textarea" rows="3"  style="width:100%" size="mini" v-model="createItem.remark"></el-input>
           </el-form-item>
           <!-- <el-form-item label="是否有效" label-width="80px" prop="state">
             <el-select  style="width:100%" size="mini"  v-model="createItem.state"  >
@@ -95,16 +95,16 @@
               </el-select>
           </el-form-item> -->
          </el-col>
-          <el-col :span="7">
+          <el-col :span="12">
              <div class='title_class'>关联规则</div>
             <div class="rule_tree">
               <el-input class='rule_tree_input'
-                 size="small"
+                 size="mini"
                 placeholder="输入关键字进行过滤"
                 v-model="filterText">
               </el-input>
              <el-scrollbar class="scrollbar-class" >
-                <el-tree    :filter-node-method="filterNode" :data="ruleList" :props="ruleListTreeProps" node-key="dpRuleId" ref="ruleListTree"  show-checkbox ></el-tree>
+                <el-tree :filter-node-method="filterNode" :data="ruleList" :props="ruleListTreeProps" node-key="dpRuleId" ref="ruleListTree"  show-checkbox ></el-tree>
              </el-scrollbar>
             </div>
           </el-col>
@@ -112,10 +112,10 @@
       </el-form>
      
       <div slot="footer" class="dialog-footer">
-        <el-button size="small" type="primary" @click="submitForm('createItemForm')"> 
+        <el-button size="mini" type="primary" @click="submitForm('createItemForm')"> 
           <i class="el-icon-copy-document"></i> 保存
         </el-button>
-        <el-button size="small" @click="cancel">取 消</el-button>
+        <el-button size="mini" @click="cancel">取 消</el-button>
       </div>
   </el-dialog>
 </div>
@@ -452,19 +452,23 @@ export default {
     padding: 5px;
  }
  .rule_tree{
-    width: 300px;
+    width: 100%;
     height: 300px;
     .rule_tree_input{
        padding-top:5px;
        padding-bottom:5px;
     }
  }
-.el-scrollbar.scrollbar-class{
-  height:100%;border:1px solid #dcdfe6;border-radius: 4px;
+/deep/.el-scrollbar.scrollbar-class{
+  height: 270px;
+  padding-left: 10px;
+  border:1px solid #dcdfe6;border-radius: 4px;
   .el-scrollbar__wrap {overflow-x: hidden;
   .el-tree-node__label{font-size:12px;}
   }
-
+  .el-tree-node__expand-icon.is-leaf{
+    display: none;
+  }
 }
 .rule_tree{
   .el-tree>.el-tree-node{
@@ -472,7 +476,5 @@ export default {
     display:inline-block;
   }
 }
-
-
 
 </style>

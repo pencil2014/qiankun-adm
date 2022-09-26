@@ -87,6 +87,22 @@ export function bkgOriginalCgm(data) {
     data
   });
 }
+// 订舱
+export function bkgOriginalEmc(data) {
+  return request({
+    url: "/ext/ship/edi/emc/bkg/original",
+    method: "post",
+    data
+  });
+}
+// 订舱
+export function bkgOriginalHmm(data) {
+  return request({
+    url: "/ext/ship/edi/hmm/bkg/original",
+    method: "post",
+    data
+  });
+}
 // 补料
 export function siOriginal(data) {
   return request({
@@ -115,6 +131,14 @@ export function siOriginalLeyu(data) {
 export function siOriginalCgm(data) {
   return request({
     url: "/ext/ship/edi/cg/si/original",
+    method: "post",
+    data
+  });
+}
+// 补料
+export function siOriginalEmc(data) {
+  return request({
+    url: "/ext/ship/edi/emc/si/original",
     method: "post",
     data
   });

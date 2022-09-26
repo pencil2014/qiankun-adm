@@ -66,8 +66,8 @@
 				<el-table-column align="center" prop="businessCname" label="业务类型"> </el-table-column>
 				<el-table-column align="center" prop="row" label="操作" width="300">
 					<template slot-scope="scope">
-						<el-button @click="handleEdit(scope.row)" type="text" size="small">查看</el-button>
-						<el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
+						<el-button @click="handleEdit(scope.row)" type="text" size="mini">查看</el-button>
+						<el-button style="color:#cd4130;" @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -222,12 +222,12 @@
 						</el-table-column>
 						<el-table-column align="center" label="操作" width="80">
 							<template slot-scope="scope">
-								<el-button @click="ruleLineDelete(scope)" type="text" size="small">删除</el-button>
+								<el-button @click="ruleLineDelete(scope)" type="text" size="mini">删除</el-button>
 							</template>
 						</el-table-column>
 					</el-table>
 					<div class="dialog-add">
-						<el-button style="width:100%" size="small" @click="ruleLineAdd">
+						<el-button style="width:100%" size="mini" @click="ruleLineAdd">
 							<i class="el-icon-plus"></i>
 							新增航线
 						</el-button>
@@ -235,8 +235,8 @@
 				</el-row>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
-				<el-button v-if="!createItem.jobId" size="small" type="primary" @click="submitForm('createItemForm')"> <i class="el-icon-copy-document"></i> 保存 </el-button>
-				<el-button size="small" @click="cancel">取 消</el-button>
+				<el-button v-if="!createItem.jobId" size="mini" type="primary" @click="submitForm('createItemForm')"> <i class="el-icon-copy-document"></i> 保存 </el-button>
+				<el-button size="mini" @click="cancel">取 消</el-button>
 			</div>
 		</el-dialog>
 
@@ -264,8 +264,8 @@
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
-				<el-button size="small" type="primary" @click="assignEmployeeSubmitForm('assignEmployeeItemForm')"> <i class="el-icon-copy-document"></i> 保存 </el-button>
-				<el-button size="small" @click="assignEmployeeCancel">取 消</el-button>
+				<el-button size="mini" type="primary" @click="assignEmployeeSubmitForm('assignEmployeeItemForm')"> <i class="el-icon-copy-document"></i> 保存 </el-button>
+				<el-button size="mini" @click="assignEmployeeCancel">取 消</el-button>
 			</div>
 		</el-dialog>
 	</div>

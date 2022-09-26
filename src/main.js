@@ -11,7 +11,7 @@ import '@/styles/index.scss' // global css
 
 import App from './App'
 import store from './store'
-import router from './router'
+import router, { asyncRoutes } from './router'
 import directive from './directive'
 
 import { setToken } from '@/utils/auth'
@@ -29,6 +29,7 @@ import EllipsisText from '@/components/ellipsis-text'
 import resize from "vue-element-resize-detector"
 import tableTooltip from '@/components/Base/Table/table-tooltip'
 import elDatePickerLimit from '@/components/Form/elDatePickerLimit'
+import DetailDiv from '@/views/finance/components/detailDiv'
 
 // filters
 import commonFilters from '@/filters/index.js'
@@ -223,7 +224,8 @@ Vue.use(Print);
 Vue.prototype.jumpRouteFromToList = []
 // 暂无数据
 Vue.component('NoData', NoData)
-
+// 详情页冒号对齐显示组件
+Vue.component('DetailDiv', DetailDiv)
 
 // 自定义显示tooltip组件
 Vue.component('EllipsisText', EllipsisText)
@@ -293,6 +295,7 @@ export async function bootstrap() {
 export async function mount(props) {
   console.log('[vue] props from main framework', props);
   let state = props.getGlobalState()
+  state.subRouters[props.name] = asyncRoutes
 	setToken(state.token)
 	store.dispatch('user/setToken', state.token)
 	store.dispatch('user/setUserInfo', state.userInfo)

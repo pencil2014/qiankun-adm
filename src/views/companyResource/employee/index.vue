@@ -49,8 +49,6 @@
 <script>
 import FinanceTableMass from '@/views/finance/components/financeTableMass/financeTableMass'
 import FinanceSearch from '@/views/finance/components/financeSearch/financeSearch'
-import { weightLimitChargeList, weightLimitChargeAdd, weightLimitChargeUpdate, weightLimitChargeInfo, weightLimitChargeDelete, weightLimitChargeExport } from '@/api/charge/weightLimitCharge'
-import organizeTree from '@/components/organize-tree'
 import { departmentTreeList, employeeList, deptEmployeeList, jobSelectList, employeeLeave } from '@/api/companyResource'
 import EmployeeSave from './employeeSave'
 import { mapGetters } from 'vuex'
