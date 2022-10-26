@@ -32,7 +32,7 @@ export default {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   position: relative;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   background-color: #f5f7f9;
 }
 .fixed-header+.app-main {

@@ -294,6 +294,7 @@ export default {
 <style  lang="scss" scoped>
 // components/Base组件
 .menu{
+  margin:14px;
    .filter-containe {
      display: flex;
      flex-direction: row;

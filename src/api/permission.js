@@ -796,8 +796,14 @@ export function sysLinePermissionGroupList(data) {
   })
 }
 
-
-
+// 港口日志
+export function baseDataLog(data) {
+  return request({
+    url: '/base/webapi/baseDataLog/list',
+    method: 'post',
+    data
+  })
+}
 
 
 

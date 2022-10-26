@@ -15,7 +15,7 @@
         action="https://httpbin.org/post"
         list-type="picture-card"
       >
-        <el-button size="mini" type="primary">
+        <el-button size="small" type="primary">
           Click upload
         </el-button>
       </el-upload>

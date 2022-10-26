@@ -515,6 +515,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/deep/ .finance-page{
+  margin: 14px 0 !important;
+}
 .wrap {
   // 树结构
   .approval-org-tree {

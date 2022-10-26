@@ -215,6 +215,9 @@
             <el-button @click="handleEdit(scope.row)" type="text" size="mini"
               >查看</el-button
             >
+            <el-button @click="handleLog(scope.row)" type="text" size="mini"
+              >日志</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -429,13 +432,15 @@
         <el-button size="mini" @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+    <Log v-if="logOption.show" :logOption='logOption' />
   </div>
 </template>
 <script>
 import { portList, portSave } from "@/api/baseData";
 import { mapGetters } from "vuex";
 import Pagination from "@/components/Base/Table/pagination";
-// import { roleSelectList } from "@/api/permission";
+import { roleSelectList } from "@/api/permission";
+import Log from './log.vue'
 import {
   baseSystemLineList,
   countrySelectList,
@@ -568,11 +573,17 @@ export default {
         ],
         
       },
+      // 日志
+      logOption: {
+        show: false,
+        code: ''
+      }
     };
   },
   // table基础组件
   components: {
     Pagination,
+    Log
   },
   created() {},
   mounted() {
@@ -583,6 +594,11 @@ export default {
   },
 
   methods: {
+    handleLog (row) {
+      let { portCode: code } = row
+      this.logOption.code = code
+      this.logOption.show = true
+    },
     portQuery(queryString, cb) {
       let params = {};
       Object.assign(params, {

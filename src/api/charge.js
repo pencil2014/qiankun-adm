@@ -622,35 +622,3 @@ export function enquiryCopy(data) {
     data
   })
 }
-// 海外询价-终止
-export function enquiryBreak(data) {
-  return request({
-    url: '/order/over/enquiry/break',
-    method: 'post',
-    data
-  })
-}
-// 海外询价-批量增加参与人接口
-export function participantAddBatch(data) {
-  return request({
-    url: '/order/over/enquiry/participant/Add/batch',
-    method: 'post',
-    data
-  })
-}
-// 海外询价-批量增加参与人接口
-export function participantDelete(data) {
-  return request({
-    url: '/order/over/enquiry/participant/delete',
-    method: 'post',
-    data
-  })
-}
-// 海外询价未读信息
-export function unreadCount(data) {
-  return request({
-    url: '/order/over/enquiry/unread/count',
-    method: 'post',
-    data
-  })
-}

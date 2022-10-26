@@ -64,7 +64,7 @@
 				<el-table-column align="center" prop="row" label="操作" width="150">
 					<template slot-scope="scope">
 						<el-button @click="handleEdit(scope.row)" type="text" size="mini">查看</el-button>
-						<el-button style="margin-right:10px;color:#cd4130;" @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
+						<el-button style="margin-left:0;color:red;" @click="handleDelete(scope.row)" type="text" size="mini">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -567,6 +567,7 @@ export default {
 	}
 }
 .menu {
+	margin: 14px;
 	.filter-containe {
 		display: flex;
 		flex-direction: row;

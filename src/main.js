@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
-import ElementUI from 'element-ui'
+import ElementUI, {Table} from 'element-ui'
 import './styles/element-variables.scss'
 // import 'element-ui/lib/theme-chalk/index.css'
 
@@ -11,7 +11,7 @@ import '@/styles/index.scss' // global css
 
 import App from './App'
 import store from './store'
-import router, { asyncRoutes } from './router'
+import router from './router'
 import directive from './directive'
 
 import { setToken } from '@/utils/auth'
@@ -29,7 +29,6 @@ import EllipsisText from '@/components/ellipsis-text'
 import resize from "vue-element-resize-detector"
 import tableTooltip from '@/components/Base/Table/table-tooltip'
 import elDatePickerLimit from '@/components/Form/elDatePickerLimit'
-import DetailDiv from '@/views/finance/components/detailDiv'
 
 // filters
 import commonFilters from '@/filters/index.js'
@@ -209,6 +208,16 @@ Vue.prototype.$confirmWarn = (message, callback, callback2) => ElementUI.Message
 }).then((val) => val && callback()).catch(() => { callback2 && callback2() })
 
 console.log(process.env);
+// 解决 ElTable 自动宽度高度导致的「ResizeObserver loop limit exceeded」问题
+const fixElTableErr = table => {
+  const oldResizeListener = table.methods.resizeListener
+  table.methods.resizeListener = function () {
+    window.requestAnimationFrame(oldResizeListener.bind(this))
+  }
+}
+// 一定要在Vue.use之前执行此函数
+fixElTableErr(Table)
+
 
 Vue.use(ElementUI, {
   i18n: (key, value) => i18n.t(key, value)
@@ -224,8 +233,7 @@ Vue.use(Print);
 Vue.prototype.jumpRouteFromToList = []
 // 暂无数据
 Vue.component('NoData', NoData)
-// 详情页冒号对齐显示组件
-Vue.component('DetailDiv', DetailDiv)
+
 
 // 自定义显示tooltip组件
 Vue.component('EllipsisText', EllipsisText)
@@ -295,7 +303,6 @@ export async function bootstrap() {
 export async function mount(props) {
   console.log('[vue] props from main framework', props);
   let state = props.getGlobalState()
-  state.subRouters[props.name] = asyncRoutes
 	setToken(state.token)
 	store.dispatch('user/setToken', state.token)
 	store.dispatch('user/setUserInfo', state.userInfo)
@@ -306,6 +313,45 @@ export async function unmount() {
   instance.$el.innerHTML = '';
   instance = null;
   // router = null;
+}
+
+
+localStorage.setItem('_sw_heartbeat_time', new Date().getTime())
+setInterval(() => {
+  localStorage.setItem('_sw_heartbeat_time', new Date().getTime())
+}, 12000)
+
+getJumpRouteFromToList()
+window.onbeforeunload = function () {
+  let saveJumpRouteWhenRf = store.state.finance.saveJumpRouteWhenRf
+  if (saveJumpRouteWhenRf && Vue.prototype.jumpRouteFromToList && Vue.prototype.jumpRouteFromToList.length > 0) {
+    saveJumpRouteFromToList(Vue.prototype.jumpRouteFromToList)
+  }
+  sessionStorage.removeItem('routeDialInfoList')
+}
+function getJumpRouteFromToList() {
+  let jumpRouteFromToListStr = window.localStorage.getItem('jumpRouteFromToListStr')
+  let jumpRouteFromToList = jumpRouteFromToListStr ? JSON.parse(jumpRouteFromToListStr) : []
+  jumpRouteFromToList.forEach(item => {
+    Vue.prototype.jumpRouteFromToList.push(item)
+  })
+}
+function saveJumpRouteFromToList(jumpRouteFromToList) {
+  // 不拆解会报错
+  jumpRouteFromToList = jumpRouteFromToList.map(item => {
+    let from, to
+    {
+      let { fullPath, hash, meta, name, params, path, query } = item.from
+      from = { fullPath, hash, meta, name, params, path, query }
+    }
+    {
+      let { fullPath, hash, meta, name, params, path, query } = item.to
+      to = { fullPath, hash, meta, name, params, path, query }
+    }
+    return { from, to, ts: item.ts }
+  })
+  let jumpRouteFromToListStr = JSON.stringify(jumpRouteFromToList)
+  window.localStorage.setItem('jumpRouteFromToListStr', jumpRouteFromToListStr)
 }
 
 Number.prototype.fixed = function (len) {

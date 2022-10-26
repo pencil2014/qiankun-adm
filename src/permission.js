@@ -12,9 +12,17 @@ const defaultSettings = require('./settings')
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-
-
+const whiteList = ['/login', '/forget'] // no redirect whitelist
 let ISCHROMIUM = navigator.userAgent.includes('AppleWebKit')
+const hasToken = getToken()
+if (hasToken) {
+  let _sw_heartbeat_time = localStorage.getItem('_sw_heartbeat_time')
+  if (location.host.indexOf('localhost') === -1 && new Date().getTime() - _sw_heartbeat_time > 15000) {
+    store.dispatch('user/resetToken').then(() => {
+    })
+    router.push({ name: 'Login' })
+  }
+}
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
@@ -52,6 +60,11 @@ router.beforeEach(async (to, from, next) => {
   // 判断是否登录
   const hasToken = getToken()
   if (hasToken) {
+    if (to.path === '/login') {
+      // login，跳转默认首页
+      next({ path: '/' })
+      NProgress.done()
+    } else {
       // 获取用户权限
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
@@ -147,6 +160,68 @@ router.beforeEach(async (to, from, next) => {
           // 动态添加可访问路由
           router.addRoutes(accessRoutes)
 
+          // 说一直打开page体验不好，不做
+          // // for refresh
+          // let mainCurrPath = sessionStorage.getItem('mainCurrPath')
+          // let mainVisitedViews = sessionStorage.getItem('mainVisitedViews')
+          // let realCurrPath = location.href.split('#')[1]
+          // realCurrPath = realCurrPath ? realCurrPath : ''
+          // if (mainVisitedViews && mainCurrPath && realCurrPath === mainCurrPath) {
+          //   mainVisitedViews = JSON.parse(mainVisitedViews)
+          //   let i = 0
+          //   let timer1 = setInterval(() => {
+          //     if (i >= mainVisitedViews.length) {
+          //       mainVisitedViews.forEach((item) => {
+          //         if (store.state.tagsView.visitedViews.every(subItem => {
+          //           return subItem.name !== item.name
+          //         })) {
+          //           router.push({ // 打开没有打开的页面
+          //             name: item.name,
+          //             query: item.query,
+          //             params: item.params,
+          //           })
+          //         }
+          //       })
+          //       let realCurrPath2 = location.href.split('#')[1]
+          //       realCurrPath2 = realCurrPath2 ? realCurrPath2 : ''
+          //       if (!realCurrPath2.includes(mainCurrPath)) {
+          //         router.push(mainCurrPath) // 处理完其他页面，再处理当前页面
+          //       }
+          //       return
+          //     }
+          //     let item = mainVisitedViews[i]
+          //     if (mainCurrPath === item.fullPath) {
+          //       item = mainVisitedViews[++i]
+          //     }
+          //     console.log('i: ', i)
+          //     if (i++ < mainVisitedViews.length) {
+          //       // console.log('mainCurrPath: ', mainCurrPath)
+          //       // console.log('item.fullPath: ', item.fullPath)
+          //       // console.log('item: ', item)
+          //       console.log('item.name: ', item.name)
+          //       console.log('first date: ', new Date().getTime())
+          //       router.push({
+          //         name: item.name,
+          //         query: item.query,
+          //         params: item.params,
+          //       })
+          //     }
+          //   }, 900)
+          //   let timer2 = setTimeout(() => {
+          //     console.log('mainCurrPath: ', mainCurrPath)
+          //     console.log('mainVisitedViews.length: ', mainVisitedViews.length)
+          //     console.log('second date:', new Date().getTime())
+          //     // router.push(mainCurrPath) // 移到上面
+          //     clearInterval(timer1)
+          //     // mainVisitedViews.forEach(item => {
+          //     //   if (item.timer) {
+          //     //     clearTimeout(item.timer)
+          //     //   }
+          //     // })
+          //     clearTimeout(timer2)
+          //   }, mainVisitedViews.length * 900 + 900)
+          // }
+
           // 页面模块权限
           // await store.dispatch('user/allPageModuleCheckAuth')
 
@@ -173,13 +248,22 @@ router.beforeEach(async (to, from, next) => {
           })
 
           // next(`/login?redirect=${to.path}`)
-          history.pushState(null, '', `/web-main/#/login`)
+          next('/login')
+          NProgress.done()
         }
       }
-    
+    }
   } else {
     // 未登录
-    history.pushState(null, '', `/web-main/#/login`)
+    if (whiteList.indexOf(to.path) !== -1) {
+      // 免登陆白名单内，直接进入
+      next()
+    } else {
+      // 否则全部重定向到登录页
+      // next(`/login?redirect=${to.path}`)
+      next('/login')
+      NProgress.done()
+    }
   }
 })
 

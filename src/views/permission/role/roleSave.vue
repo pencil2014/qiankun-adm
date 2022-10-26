@@ -9,7 +9,7 @@
          </el-col>
          <el-col :span="12">
           <el-form-item label="角色编码" label-width="80px" prop="roleCode">
-            <el-input :style="createItem.sysRoleId>0?'width:100%':'width:80%'" size="mini" :disabled="sysGenCodeChecked||createItem.sysRoleId>0" v-model="createItem.roleCode" placeholder="全局唯一编码"></el-input>
+            <el-input :style="createItem.sysRoleId>0?'width:100%':'width:80%'" size="small" :disabled="sysGenCodeChecked||createItem.sysRoleId>0" v-model="createItem.roleCode" placeholder="全局唯一编码"></el-input>
             <el-checkbox style="margin-left:10px" v-if="createItem.sysRoleId==''" v-model="sysGenCodeChecked" @change="handleChangeSystemGenCode">系统生成</el-checkbox>
           </el-form-item>
          </el-col>
@@ -54,7 +54,7 @@
       </el-transfer>     
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button size="mini" type="primary" :class="createItem.sysRoleId>0?'update-primary-button':''"  @click="submitForm('createItemForm')">
+      <el-button size="small" type="primary" :class="createItem.sysRoleId>0?'update-primary-button':''"  @click="submitForm('createItemForm')">
          {{createItem.sysRoleId>0?"修改":"确定"}}
         </el-button>
       <el-button  size="mini" @click="visible = false">取消</el-button>

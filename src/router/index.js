@@ -6,14 +6,14 @@ Vue.use(Router)
 import Permission from './modules/permission'
 import CompanyResource from './modules/companyResource'
 import BaseData from './modules/baseData'
-import Notice from './modules/notice'
+
 export const constantRoutes = [
 	{
 		path: '/404',
 		component: () => import('@/views/404'),
 		hidden: true
 	},
-  {
+	{
 		path: '/',
 		redirect: '/companyResource/department',
 		children: [
@@ -25,7 +25,6 @@ export const asyncRoutes = [
 	Permission,
 	CompanyResource,
 	BaseData,
-  Notice,
 	{ path: '*', redirect: '/404', hidden: true }
 ]
 

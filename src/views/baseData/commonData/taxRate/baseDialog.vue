@@ -125,7 +125,6 @@
 						</el-cascader>
 						<el-checkbox v-else-if="item.type === 'checkbox'" v-model="option.form[item.prop]">默认首选</el-checkbox>
 						<tinymce class="mail-sign-rich-text" v-else-if="item.type === 'richtext'" :toolbar="tinymceConfig.toolbar" :menubar="tinymceConfig.menubar" v-model="option.form[item.prop]" :height="180" ref="mailSign" />
-
 						<!-- </el-col> -->
 					</el-form-item>
 				</template>

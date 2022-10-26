@@ -8,7 +8,6 @@ import user from './modules/user'
 import tagsView from './modules/tagsView'
 import dict from './modules/dict'
 import notice from './modules/notice'
-import contract from './modules/contract'
 
 Vue.use(Vuex)
 
@@ -20,8 +19,7 @@ const store = new Vuex.Store({
     user,
     tagsView,
     dict,
-    notice,
-    contract
+    notice
   },
   getters
 })

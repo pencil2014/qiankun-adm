@@ -1,6 +1,6 @@
 <template>
-<div class="menu" v-loading="loading">
-  <div class="components-container">
+<div class="menu">
+  <div class="components-container  m-t-8">
     <div class="filter-containe search-layout">
       <div class="filter">
         <el-button size="mini"  @click="handleAdd('')" type="primary">
@@ -8,48 +8,18 @@
         </el-button>
       </div>
     </div>
-    <vxe-table
-        border="inner"
-        ref="xTree"
-        size="mini"
-        :column-config="{ resizable: true }"
-        :tree-config="{
-          children: 'subResourceList',
-          parentField: 'rowkey',
-          iconOpen: 'el-icon-arrow-down',
-          iconClose: 'el-icon-arrow-right',
-        }"
-        :data="resourceTreeList"
-      >
-        <vxe-column field="resourceName" title="名称" header-align="center" align="left" tree-node></vxe-column>
-        <vxe-column field="resourceCode" title="编码" align="center"></vxe-column>
-        <vxe-column field="level" title="菜单层级" align="center"></vxe-column>
-        <vxe-column field="resourceType" title="类型" align="center">
-          <template #default="{ row }">
-            {{ $t(`dict.resourceType.${row.resourceType}`) }}
-          </template>
-        </vxe-column>
-        <vxe-column field="sort" title="显示顺序" align="center"></vxe-column>
-        <vxe-column field="resourceUrl" title="链接地址" align="center"></vxe-column>
-        <vxe-column title="操作" width="300" align="center">
-          <template #default="{ row }">
-            <el-button @click="handleEdit(row)" type="text" size="mini">查看</el-button>
-            <el-button @click="handleAdd(row)" type="text" size="mini">新增子模块</el-button>
-            <el-button @click="handleDelete(row)" type="text" size="mini">删除</el-button>
-          </template>
-        </vxe-column>
-      </vxe-table>
-    <!-- <el-table
+    <el-table v-loading="loading"
       ref="tableLayout"
       :data="resourceTreeList"
        style="margin:16px 0px"
        row-key="rowKey"
        :load="loadSubMenu"
       :tree-props="{children: 'subResourceList', hasChildren: 'hasChildren'}"
+      :max-height="tableHeight || 500"
     >
         <el-table-column header-align="center" align="left" prop="resourceName" label="名称" ></el-table-column>
         <el-table-column align="center" prop="resourceCode"  label="编码" ></el-table-column>
-        <el-table-column align="center" prop="level" label="菜单层级"  ></el-table-column>
+        <el-table-column align="center" prop="level" label="菜单层级" ></el-table-column>
          <el-table-column align="center" prop="resourceType" label="类型" >
             <template slot-scope="scope">
               {{ $t(`dict.resourceType.${scope.row.resourceType}`)}}
@@ -64,10 +34,10 @@
               <el-button @click="handleDelete(scope.row)" size="mini" type="text">删除</el-button>
             </template>
          </el-table-column>
-    </el-table> -->
+    </el-table>
   </div>
   <el-dialog :title="title" :visible.sync="open" :lock-scroll="true" width="600px"  @close="dialogClose">
-     <el-form ref="createItemForm" :rules="rules" :model="createItem" label-suffix=":"  size="mini">
+     <el-form ref="createItemForm" :rules="rules" :model="createItem" label-suffix=":"  >
        <div class="parentWrap" v-if="title === '新增'">
         <el-row  :gutter="25">
           <el-col :span="12"><span class="text">父级菜单名称:&nbsp;&nbsp;{{parentMenuName}}</span></el-col>
@@ -91,16 +61,6 @@
          <el-form-item label="功能路径" label-width="80px" prop="resourceUrl">
           <el-input style="width:100%" size="mini" v-model="createItem.resourceUrl" placeholder="请输入功能路径"></el-input>
         </el-form-item>
-        <el-form-item label="子系统" label-width="80px" prop="sysCode">
-          <el-select v-model="createItem.sysCode" placeholder="请选择" style="width:80%" clearable>
-            <el-option
-              v-for="item in dictMap['sysCode']"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="备注" v-show="createItem.resourceType==='module'" label-width="80px" prop="remark">
           <el-input style="width:100%" size="mini" v-model="createItem.remark" placeholder="备注"></el-input>
         </el-form-item>
@@ -122,8 +82,10 @@ import {menuList,menuAdd,menuInfo,menuDelete} from '@/api/permission'
 import { mapGetters } from 'vuex'
 
 export default {
+  
   name:"menuFunction",
   data() {
+  
     return {
       //弹框标题
       title:"",
@@ -148,8 +110,7 @@ export default {
         "parentCurrentId":"",
         "parentResourceType":"",
         "remark":"",
-        "oldResourceType":"",
-        sysCode: ''
+        "oldResourceType":""
       },
       parentMenuName:"",
       parentMenuCode:"",
@@ -163,7 +124,7 @@ export default {
             { required: true, message: '资源名称不能为空', trigger: 'blur' },
           ],
       },
-      tableHeight: 500
+      tableHeight: null
     };
   },
    // table基础组件
@@ -173,10 +134,10 @@ export default {
      this.getList();
   },
   mounted() {
-    // window.addEventListener('resize', this.computedTableHeight)
-		// this.$nextTick(() => {
-		// 	this.computedTableHeight()
-		// })
+    window.addEventListener('resize', this.computedTableHeight)
+		this.$nextTick(() => {
+			this.computedTableHeight()
+		})
   },
   computed: {
     ...mapGetters([
@@ -184,14 +145,14 @@ export default {
     ])
   },
   methods: {
-    // computedTableHeight() {
-    //   let { tableLayout } = this.$refs
-		// 	let height = document.documentElement.clientHeight || document.body.offsetHeight
-		// 	let table = tableLayout.$el.getBoundingClientRect()
-		// 	// console.log('tableHeight', height, table.top)
-		// 	this.tableHeight = height - table.top - 20 -20 // 表格高度=文档高度-表格距顶部距离-表格分页-容器padding间距
-		// 	// console.log('tableHeight', this.tableHeight)
-    // },
+    computedTableHeight() {
+      let { tableLayout } = this.$refs
+			let height = document.documentElement.clientHeight || document.body.offsetHeight
+			let table = tableLayout.$el.getBoundingClientRect()
+			// console.log('tableHeight', height, table.top)
+			this.tableHeight = height - table.top - 20 -20 // 表格高度=文档高度-表格距顶部距离-表格分页-容器padding间距
+			// console.log('tableHeight', this.tableHeight)
+    },
     //清空数据
     dialogClose(){
       this.$refs['createItemForm'].resetFields()
@@ -259,7 +220,7 @@ export default {
       }).catch(function() {});
     },
     getList(resolve) {
-      this.loading = true
+      this.loading = true;
       let params={};
       menuList(params).then(res=>{
         if(resolve){
@@ -269,7 +230,8 @@ export default {
         }
         this.menuList = this.getTreeData(res.data.resourceTreeList);
         console.log(this.menuList)
-      }).finally(()=>{ this.loading = false })
+        this.loading = false
+      })
     },
     // 转化children的空数组为undefined
     getTreeData(data) {
@@ -318,7 +280,7 @@ export default {
 // components/Base组件
 .menu{
   margin: 0;
-  // padding: 10px 14px 0;
+  padding: 10px 14px 0;
    .filter-containe {
      display: flex;
      flex-direction: row;
@@ -411,11 +373,5 @@ export default {
 
  }
   
-  .vxe-table{
-    margin-top: 16px;
-  }
-  /deep/ tr.vxe-header--row{
-    background-color: #f8f9fd;
-  }
 
 </style>

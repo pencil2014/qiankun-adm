@@ -13,9 +13,9 @@ const name = defaultSettings.title || '后台管理系统' // page title
 
 const publicPathObj = {
   'development': '/',
-  'staging': '/web-adm/',
-  'test': '/web-adm/',
-  'production': '//cdnrs.longsailing.net/web-adm/'
+  'staging': '/',
+  'test': '/',
+  'production': '//cdnrs.longsailing.net/'
 }
 // If your port is set to 80,
 // use administrator privileges to execute the command line.

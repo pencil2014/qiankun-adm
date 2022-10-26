@@ -295,7 +295,7 @@ function generateMenusFrontSpecific(menus, routesTiled, isSubMenu) {
         menuFront.children = generateMenusFrontSpecific(menu.subMenu, routesTiled)
         menusFront.push(menuFront)
       } else {
-        // console.log(`菜单"${menu.menuName}, ${menu.menuCode}"无对应的前端页面或录入不正确`)
+        console.log(`菜单"${menu.menuName}, ${menu.menuCode}"无对应的前端页面或录入不正确`)
       }
     }
   })

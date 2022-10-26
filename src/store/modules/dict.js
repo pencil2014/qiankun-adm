@@ -38,12 +38,12 @@ import { supplierList, customerList, orgValidList } from '@/api/crm/supplier'
 import { setCamelFormat, getTreeData } from '@/utils/index'
 import language from '@/lang/language'
 import { orderInfo, orderInfoNoperm, orderJointInfo, bookVesselVoyage, bookVesselTime, bookVesselList, bookVoyageList } from '@/api/order/list'
-// import { orderInfo as airOrderInfo } from '@/api/airTransport/order'
+import { orderInfo as airOrderInfo } from '@/api/airTransport/order'
 import { queryFinSupplierList } from '@/api/fin/settleUnit'
 import { jobSelectList } from '@/api/companyResource'
 import { roleSelectList } from '@/api/permission'
 import { dutyDeptList } from '@/api/duty'
-// import { orderInfo as railOrderInfo } from '@/api/railway/list'
+import { orderInfo as railOrderInfo } from '@/api/railway/list'
 const getDefaultState = () => {
 	return {
 		// 数据字典

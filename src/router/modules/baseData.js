@@ -32,12 +32,6 @@ const baseDataRouter = {
 					meta: { title: '汇率管理', isMenu: true, keepAlive: true, isUseCache: true } // 汇率配置
 				},
 				{
-					path: 'exception',
-					component: () => import('@/views/baseData/commonData/exception/indexTabs'), 
-					name: 'Exception',
-					meta: { title: '异常类型', isMenu: true, keepAlive: true, isUseCache: true } // 异常类型
-				},
-				{
 					path: 'exchangeRateConfig',
 					component: () => import('@/views/baseData/commonData/exchangeRate'),
 					name: 'ExchangeRateConfig',

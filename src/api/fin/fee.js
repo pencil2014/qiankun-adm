@@ -283,18 +283,9 @@ export function updateOrderFeeBl(data) {
     data
   })
 }
-// 修改提单号
 export function batchUpdateOrderFeeBl(data) {
   return request({
     url: '/fin/fee/batchUpdateOrderFeeBl',
-    method: 'post',
-    data
-  })
-}
-// 修改负数跟进人
-export function updateNegativeFollower(data) {
-  return request({
-    url: '/fin/fee/updateNegativeFollower',
     method: 'post',
     data
   })

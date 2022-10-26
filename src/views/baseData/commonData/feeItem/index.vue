@@ -47,7 +47,6 @@
   </div>
 </template>
 <script>
-import actions from '@/action'
 import Vue from 'vue'
 import FinanceTable from '@/views/finance/components/financeTableMass/financeTableMass'
 import FinanceSearch from '@/views/finance/components/financeSearch/financeSearch'

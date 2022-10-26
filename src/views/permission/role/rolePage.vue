@@ -19,10 +19,10 @@
         </div>
       </div>
       <div class="operation-btns-box" >
-        <el-button size="mini"  @click="handleSearch" type="primary">
+        <el-button size="small"  @click="handleSearch" type="primary">
           <i class="el-icon-search"></i> 搜索
         </el-button>
-        <el-button size="mini"  @click="handleReset" plain>
+        <el-button size="small"  @click="handleReset" plain>
            重置 
         </el-button>
       </div>
@@ -31,7 +31,7 @@
   <div class="components-container  m-t-8">
     <div class="filter-containe search-layout">
       <div class="filter">
-        <el-button size="mini"  @click="handleAdd()" type="primary">
+        <el-button size="small"  @click="handleAdd()" type="primary">
           <i class="el-icon-plus"></i> 页面权限配置
         </el-button>
       </div>
@@ -42,7 +42,7 @@
         <el-table-column align="center" prop="decription"  label="描述" > </el-table-column>
         <el-table-column align="center" prop="row" label="操作" width="300">
             <template slot-scope="scope">
-              <el-button @click="handleAdd(scope.row)" type="text" size="mini">编辑</el-button>
+              <el-button @click="handleAdd(scope.row)" type="text" size="small">编辑</el-button>
             </template>
          </el-table-column>
     </el-table>

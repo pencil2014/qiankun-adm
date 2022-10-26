@@ -29,7 +29,7 @@ export default {
   computed: {
     siteContentViewHeight() {
       //浏览器高度减去top栏的高度
-      var height = document.body.clientHeight -60
+      var height = document.body.clientHeight -30
       return { minHeight: height + 'px' };
     }
   },

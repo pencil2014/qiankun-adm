@@ -99,7 +99,7 @@ export default {
 }
 .edit-row {
   background: rgba(255, 255, 255, 1);
-  // margin: 16px 16px 10px;
+  margin: 16px 16px 10px;
 }
 .row-tit {
   display: flex;
